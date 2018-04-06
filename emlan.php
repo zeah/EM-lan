@@ -14,9 +14,10 @@ defined('ABSPATH') or die('Blank Space');
 define('EMLAN_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 function emlan_init() {
-	// if (is_admin())
+	if (is_admin())
 		Emlan_Posttype::get_instance();
-	// else
+	else
+		Emlan_Shortcode::get_instance();
 
 }
 

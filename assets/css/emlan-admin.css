@@ -1,0 +1,25 @@
+html {
+	font-size: 62.5%;
+}
+.emlan-container {
+	font-size: 2rem;
+
+}
+
+.emlan-input-container {
+	margin-bottom: 6rem;
+}
+
+.emlan-title {
+	line-height: 1;
+	margin-bottom: 0.5rem;
+}
+
+.emlan-input {
+	font-size: 1.8rem;
+	width: 100rem;
+}
+
+.emlan-counter {
+	padding-left: 3rem;
+}

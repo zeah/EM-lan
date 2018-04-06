@@ -1,0 +1,36 @@
+
+/*
+	HTML_DEFAULTS
+
+	LIST_CONTAINER
+	LÅN_CONTAINER
+
+
+
+*/
+
+html {
+	font-size: 62.5%;
+}
+
+
+
+/* LIST_CONTAINER */
+.emlanlist-container > div > div > div {
+	/*border: solid 1px black;*/
+	align-self: center;
+}
+
+/* LÅN_CONTAINER */
+.emlan-container {
+	background-color: #aae;
+	padding: 1rem;
+}
+
+.emlan-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+
+

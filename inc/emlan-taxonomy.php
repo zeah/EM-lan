@@ -51,6 +51,6 @@ final class Emlan_Taxonomy {
 			'capabilities'      => array(),
 		);
 	
-		register_taxonomy('lantype', 'emlan', $args );
+		register_taxonomy('emlantype', 'emlan', $args );
 	}
 }

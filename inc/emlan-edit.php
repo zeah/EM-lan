@@ -16,9 +16,9 @@ final class Emlan_Edit {
 		/* adding javascript to emlan list screen */
 		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_script') );
 
-		add_action('manage_emlan_posts_columns', array($this, 'column_head'));
-		add_filter('manage_emlan_posts_custom_column', array($this, 'custom_column'));
-		add_filter('manage_edit-emlan_sortable_columns', array($this, 'sort_column'));
+		// add_action('manage_emlan_posts_columns', array($this, 'column_head'));
+		// add_filter('manage_emlan_posts_custom_column', array($this, 'custom_column'));
+		// add_filter('manage_edit-emlan_sortable_columns', array($this, 'sort_column'));
 		
 		/* metabox, javascript */
 		add_action('add_meta_boxes_emlan', array($this, 'create_meta'));
@@ -28,8 +28,11 @@ final class Emlan_Edit {
 	}
 
 	public function enqueue_script() {
-		wp_enqueue_style('emlan_admin_style', EMLAN_PLUGIN_URL . '/assets/css/emlan_admin.css', array(), false);
-		wp_enqueue_script('emlan_meta', EMLAN_PLUGIN_URL . '/assets/js/emlan-admin.js', array(), false, true);
+		$screen = get_current_screen();
+		if ($screen->id == 'emlan') {
+			wp_enqueue_style('emlan_admin_style', EMLAN_PLUGIN_URL . '/assets/css/emlan-admin.css', array(), false);
+			wp_enqueue_script('emlan_meta', EMLAN_PLUGIN_URL . '/assets/js/emlan-admin.js', array(), false, true);
+		}
 	}
 
 	public function create_meta() {
@@ -45,7 +48,11 @@ final class Emlan_Edit {
 		wp_nonce_field('em'.basename(__FILE__), 'em_nonce');
 
 		$meta = get_post_meta($post->ID, 'emlan');
-		$json = ['meta' => isset($meta[0]) ? $this->sanitize($meta[0]) : ''];
+		$sort = get_post_meta($post->ID, 'emlan_sort');
+		$json = [
+			'meta' => isset($meta[0]) ? $this->sanitize($meta[0]) : '',
+			'sort' => isset($sort[0]) ? $this->sanitize($sort[0]) : '0'
+		];
 
 		wp_localize_script('emlan_meta', 'emlan', json_decode(json_encode($json), true));
 		echo '<div class="emlan-container"></div>';
@@ -68,6 +75,7 @@ final class Emlan_Edit {
 		if (!wp_verify_nonce($_POST['em_nonce'], 'em'.basename(__FILE__))) return;
 
 		if (isset($_POST['emlan'])) update_post_meta($post_id, 'emlan', $this->sanitize($_POST['emlan']));
+		if (isset($_POST['emlan_sort'])) update_post_meta($post_id, 'emlan_sort', $this->sanitize($_POST['emlan_sort']));
 
 	}
 
