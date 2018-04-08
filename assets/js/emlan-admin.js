@@ -25,13 +25,11 @@
 		title.appendChild(document.createTextNode(title_text));
 		container.appendChild(title);
 
-		
-
 		let input = document.createElement('input');
 		input.classList.add('emlan-input');
 		input.setAttribute('type', o.type);
 		input.setAttribute('name', 'emlan['+o.name+']');
-		input.setAttribute('value', meta[o.name]);
+		if (meta[o.name]) input.setAttribute('value', meta[o.name]);
 
 		container.appendChild(input);
 
@@ -42,8 +40,6 @@
 			input.addEventListener('input', () => counter.innerHTML = input.value.length );
 			container.appendChild(counter);
 		}
-		
-
 
 		return container;
 	}

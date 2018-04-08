@@ -112,16 +112,16 @@ final class Emlan_Shortcode {
 	private function make_lan($meta) {
 		global $post;
 
-		$html = print_r($meta, true);
+		// $html = print_r($meta, true);
 
-		$html .= '<div class="emlan-container">';
+		$html = '<div class="emlan-container">';
 
 		// first row
 		$html .= '<div class="emlan-row emlan-toprow">';
 
 		// thumbnail
 		$thumbnail = get_the_post_thumbnail_url($post, 'full');
-		if ($thumbnail) $html .= '<div class="emlan-thumbnail"><img src="'.$thumbnail.'"></div>';
+		if ($thumbnail) $html .= '<div class="emlan-thumbnail"><img class="emlan-thumbnail-image" src="'.$thumbnail.'"></div>';
 
 		// lånebeløp
 		$belop = isset($meta['belop']) ? $meta['belop'] : '';
@@ -149,15 +149,15 @@ final class Emlan_Shortcode {
 
 		// info 1
 		$info1 = isset($meta['info1']) ? $meta['info1'] : '';
-		if ($info1) $html .= '<div class="emlan-info1">'.$info1.'</div>';
+		if ($info1) $html .= '<div class="emlan-info1"><i class="material-icons md-18">grade</i> '.$info1.'</div>';
 		
 		// info 2
 		$info2 = isset($meta['info2']) ? $meta['info2'] : '';
-		if ($info2) $html .= '<div class="emlan-info2">'.$info2.'</div>';
+		if ($info2) $html .= '<div class="emlan-info2"><i class="material-icons md-18">grade</i> '.$info2.'</div>';
 		
 		// info 3
 		$info3 = isset($meta['info3']) ? $meta['info3'] : '';
-		if ($info3) $html .= '<div class="emlan-info3">'.$info3.'</div>';
+		if ($info3) $html .= '<div class="emlan-info3"><i class="material-icons md-18">grade</i> '.$info3.'</div>';
 		
 		$html .= '</div>';
 
