@@ -23,11 +23,9 @@ html {
 
 
 /* LIST_CONTAINER */
-/*.emlanlist-container > div > div > div {*/
-/*	border: solid 1px black;
-	align-self: center;
-	text-align: center;*/
-/*}*/
+.emlanlist-container {
+	opacity: 1 !important;
+}
 
 /* LÅN_CONTAINER */
 .emlan-container {
@@ -37,6 +35,10 @@ html {
 	text-align: center;
 	margin-bottom: 3rem;
 }
+
+/*.emlan-container > div > div {
+	border: solid 1px black;
+}*/
 
 /* ROW */
 .emlan-row {
@@ -54,14 +56,16 @@ html {
 }
 
 .emlan-toprow {
-	padding-bottom: 2rem;
+	padding-bottom: 1rem;
 }
 .emlan-middlerow {
-	padding: 2rem 0;
+	padding: 1rem 0;
 	background-color: hsla(0, 0%, 90%, .3);
+	/*justify-content: space-around;*/
+
 }
 .emlan-bottomrow {
-	padding-top: 2rem;
+	padding-top: 1rem;
 }
 
 .emlan-row > div {
@@ -110,21 +114,29 @@ html {
 .emlan-lenke {
 	padding: 1rem 2rem;
 	border-radius: 5px;
-	font-size: 2.4rem;
+	font-size: 2rem;
 	text-decoration: none;
 	color: white;
-	/*text-shadow: 1px 1px 1px hsl(120, 20%, 30%);*/
 	white-space: nowrap;
 }
 
 .emlan-lenke-fatilbud {
-	background-image: linear-gradient(hsl(120, 60%, 60%) 10%, hsl(120, 60%, 50%) 90%);
+	background-image: linear-gradient(rgb(136, 221, 72) 0%, rgb(95, 177, 57) 100%);
 	text-shadow: 1px 1px 1px hsl(120, 20%, 30%);
+	font-weight: 700;
+	border: solid 1px rgb(95,177,57);
+}
+
+.emlan-lenke-fatilbud:hover {
+	background-image: linear-gradient(rgb(136, 241, 72) 0%, rgb(95, 197, 57) 100%);
+	border: solid 1px rgb(95,197,57);
+	text-shadow: 2px 2px 2px hsl(120, 20%, 30%);
 }
 
 .emlan-lenke-lesmer {
 	background-image: linear-gradient(hsl(0, 0%, 70%) 10%, hsl(0, 0%, 60%) 90%);
 	padding: 0.3rem 1rem;
+	border-radius: 3px;
 	font-size: 1.6rem;
 }
 

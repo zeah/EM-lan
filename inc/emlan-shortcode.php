@@ -21,6 +21,25 @@ final class Emlan_Shortcode {
 
 		add_shortcode('emlan', array($this, 'shortcode'));
 		add_shortcode('emlån', array($this, 'shortcode'));
+
+		add_shortcode('emlan-bilde', array($this, 'shortcode_bilde'));
+		add_shortcode('emlan-sok', array($this, 'shortcode_sok'));
+
+		add_action('emlan_shortcode', array($this, 'emlan_shortcode'));
+
+        add_filter('pre_get_posts', array($this, 'set_search'), 99);
+		add_filter('add_emtheme_links', array($this, 'add_links'), 99);
+	}
+
+
+	/*
+		adds emlan custom post to search
+	*/
+	public function set_search($query) {
+        if ($query->is_search) {
+	        if (!$query->get('post_type')) $query->set('post_type', array('page', 'post', 'emlan'));
+	        else $query->set('post_type', array_merge(array('emlan'), $query->get('post_type')));
+		}
 	}
 
 	public function shortcode($atts, $content = null) {
@@ -71,8 +90,8 @@ final class Emlan_Shortcode {
 		global $post;
 
 		// container element
-		$html = '<div class="emlanlist-container">';
-		// $html = '<div class="emlanliste-container" style="opacity: 0">';
+		// $html = '<div class="emlanlist-container">';
+		$html = '<div class="emlanlist-container" style="opacity: 0">';
 
 		if ($query->have_posts()) 
 			while ($query->have_posts()) {
@@ -179,6 +198,14 @@ final class Emlan_Shortcode {
 		return $html;
 	}
 
+	public function shortcode_bilde($atts, $content = null) {
+
+	}
+
+	public function shortcode_sok($atts, $content = null) {
+
+	}
+
 	/*
 		helper function for adding css
 		adds javascript to footer that adds css files to header
@@ -207,5 +234,18 @@ final class Emlan_Shortcode {
 
 				})();
 			  </script>';
+	}
+
+	public function emlan_shortcode($post_id) {
+		add_action('wp_footer', array($this, 'footer'));
+
+		$meta = get_post_meta($post_id, 'emlan');
+
+		if (isset($meta[0])) echo $this->make_lan($meta[0]); 
+	}
+
+	public function add_links($value) {
+
+		return $value;
 	}
 }

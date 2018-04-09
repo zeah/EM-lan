@@ -10,10 +10,7 @@ html {
 }
 
 .emlanlist-container {
-	/*width: 90%;*/
-	/*border: solid 1px black;*/
-	/*align-self: center;*/
-	/*text-align: center;*/
+	opacity: 1 !important;
 }
 
 .emlan-container {
