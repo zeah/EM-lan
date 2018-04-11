@@ -3,7 +3,7 @@
 /**
 	Plugin Name: EM-Lån
 	Description: liste over lån for effektiv markedsforing
-	Version: 0.0.2
+	Version: 0.0.3
 */
 
 require_once 'inc/emlan-shortcode.php';
@@ -23,17 +23,3 @@ function emlan_init() {
 }
 
 add_action('plugins_loaded', 'emlan_init');
-
-// function test_add_emtheme($value) {
-// 	$font = 'Open Sans';
-// 	$weight = '800';
-
-// 	if (isset($value[$font]))
-// 		array_push($value[$font], $weight);
-// 	else
-// 		$value[$font] = [$weight];
-
-// 	return $value;
-// }
-
-// add_filter('add_emtheme_links', 'test_add_emtheme', 11);

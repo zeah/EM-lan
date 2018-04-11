@@ -23,12 +23,12 @@ final class Emlan_Shortcode {
 		add_shortcode('emlån', array($this, 'shortcode'));
 
 		add_shortcode('emlan-bilde', array($this, 'shortcode_bilde'));
-		add_shortcode('emlan-sok', array($this, 'shortcode_sok'));
+		add_shortcode('emlan-bestill', array($this, 'shortcode_sok'));
 
 		add_action('emlan_shortcode', array($this, 'emlan_shortcode'));
 
         add_filter('pre_get_posts', array($this, 'set_search'), 99);
-		add_filter('add_emtheme_links', array($this, 'add_links'), 99);
+		add_filter('add_google_fonts', array($this, 'add_google_fonts'), 99);
 	}
 
 
@@ -45,13 +45,13 @@ final class Emlan_Shortcode {
 	public function shortcode($atts, $content = null) {
 		$this->add_css();
 
-		$kort = null;
-		if (isset($atts['kort'])) 		$kort = $atts['kort'];
-		if (!isset($atts['name']))		return $this->do_loop(null, $kort);
-		elseif (isset($atts['name']))	return $this->do_loop(explode(',', str_replace(' ', '', $atts['name'])), $kort);
+		$lan = null;
+		if (isset($atts['lan'])) 		$lan = $atts['lan'];
+		if (!isset($atts['name']))		return $this->do_loop(null, $lan);
+		elseif (isset($atts['name']))	return $this->do_loop(explode(',', str_replace(' ', '', $atts['name'])), $lan);
 	}
 
-	private function do_loop($name = null, $kort = null) {
+	private function do_loop($name = null, $lan = null) {
 		$args = [
 			'post_type' => 'emlan',
 			'posts_per_page' => -1,
@@ -62,15 +62,13 @@ final class Emlan_Shortcode {
 			'meta_key' => 'emlan_sort'
 		];
 
-		if ($kort)
-			$args['tax_query'] = array(
-					array(
-						'taxonomy' => 'korttype',
-						'field' => 'slug',
-						'terms' => esc_html($kort)
-					)
-				);
-
+		if ($lan) $args['tax_query'] = array(
+						array(
+							'taxonomy' => 'emlantype',
+							'field' => 'slug',
+							'terms' => esc_html($lan)
+						)
+					);
 
 		if (is_array($name)) $args['post_name__in'] = $name; 
 		
@@ -90,13 +88,11 @@ final class Emlan_Shortcode {
 		global $post;
 
 		// container element
-		// $html = '<div class="emlanlist-container">';
 		$html = '<div class="emlanlist-container" style="opacity: 0">';
 
 		if ($query->have_posts()) 
 			while ($query->have_posts()) {
 				$query->the_post();
-
 
 				// to ignore "ignore" and/or "duplicate" taxonomies
 				$terms = wp_get_post_terms($post->ID, 'emlantype');
@@ -104,8 +100,7 @@ final class Emlan_Shortcode {
 				foreach($terms as $term) {
 					if ($term->slug == 'ignore') 		$ignore = true; // ignore all with ignore tag
 					elseif ($term->slug == 'duplicate' 
-						&& !$name && !$kort) 			$ignore = true; // ignore all with duplicate tag and name/kort att not used
-				
+						&& !$name && !$lan) 			$ignore = true; // ignore all with duplicate tag and name/kort att not used
 				}
 
 				if ($ignore) continue;
@@ -116,10 +111,8 @@ final class Emlan_Shortcode {
 				if (isset($meta[0])) 	$meta = $meta[0];
 				else 					continue; // if no meta, then no card
 
-
 				// adding the meta
 				$html .= $this->make_lan($meta);
-
 			}
 
 		wp_reset_postdata();
@@ -128,6 +121,9 @@ final class Emlan_Shortcode {
 		return $html;	
 	}
 
+	/*
+		printing out one lån
+	*/
 	private function make_lan($meta) {
 		global $post;
 
@@ -140,27 +136,27 @@ final class Emlan_Shortcode {
 
 		// thumbnail
 		$thumbnail = get_the_post_thumbnail_url($post, 'full');
-		if ($thumbnail) $html .= '<div class="emlan-thumbnail"><img class="emlan-thumbnail-image" src="'.$thumbnail.'"></div>';
+		if ($thumbnail) $html .= '<div class="emlan-thumbnail"><img class="emlan-thumbnail-image" src="'.esc_url($thumbnail).'"></div>';
 
 		// lånebeløp
 		$belop = isset($meta['belop']) ? $meta['belop'] : '';
-		if ($belop) $html .= '<div class="emlan-belop">'.$belop.'</div>';
+		if ($belop) $html .= '<div class="emlan-belop">'.esc_html($belop).'</div>';
 		
 		// nedbetalingstid
 		$nedbetaling = isset($meta['nedbetaling']) ? $meta['nedbetaling'] : '';
-		if ($nedbetaling) $html .= '<div class="emlan-nedbetaling">'.$nedbetaling.'</div>';
+		if ($nedbetaling) $html .= '<div class="emlan-nedbetaling">'.esc_html($nedbetaling).'</div>';
 		
 		// aldersgrense
 		$alder = isset($meta['alder']) ? $meta['alder'] : '';
-		if ($alder) $html .= '<div class="emlan-alder">'.$alder.'</div>';
+		if ($alder) $html .= '<div class="emlan-alder">'.esc_html($alder).'</div>';
 		
 		// effektiv rente
 		$effrente = isset($meta['effrente']) ? $meta['effrente'] : '';
-		if ($effrente) $html .= '<div class="emlan-effrente">'.$effrente.'</div>';
+		if ($effrente) $html .= '<div class="emlan-effrente">'.esc_html($effrente).'</div>';
 		
 		// få tilbud
 		$fatilbud = isset($meta['fatilbud']) ? $meta['fatilbud'] : '';
-		if ($fatilbud) $html .= '<div class="emlan-fatilbud"><a class="emlan-lenke emlan-lenke-fatilbud" href="'.$fatilbud.'">Få Tilbud Nå</a></div>';
+		if ($fatilbud) $html .= '<div class="emlan-fatilbud"><a class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($fatilbud).'">Få Tilbud Nå</a></div>';
 		
 		$html .= '</div>';
 
@@ -168,15 +164,15 @@ final class Emlan_Shortcode {
 
 		// info 1
 		$info1 = isset($meta['info1']) ? $meta['info1'] : '';
-		if ($info1) $html .= '<div class="emlan-info1"><i class="material-icons md-18">grade</i> '.$info1.'</div>';
+		if ($info1) $html .= '<div class="emlan-info1"><i class="material-icons md-18">grade</i> '.esc_html($info1).'</div>';
 		
 		// info 2
 		$info2 = isset($meta['info2']) ? $meta['info2'] : '';
-		if ($info2) $html .= '<div class="emlan-info2"><i class="material-icons md-18">grade</i> '.$info2.'</div>';
+		if ($info2) $html .= '<div class="emlan-info2"><i class="material-icons md-18">grade</i> '.esc_html($info2).'</div>';
 		
 		// info 3
 		$info3 = isset($meta['info3']) ? $meta['info3'] : '';
-		if ($info3) $html .= '<div class="emlan-info3"><i class="material-icons md-18">grade</i> '.$info3.'</div>';
+		if ($info3) $html .= '<div class="emlan-info3"><i class="material-icons md-18">grade</i> '.esc_html($info3).'</div>';
 		
 		$html .= '</div>';
 
@@ -184,11 +180,11 @@ final class Emlan_Shortcode {
 
 		// eks eff rente
 		$ekseffrente = isset($meta['ekseffrente']) ? $meta['ekseffrente'] : '';
-		if ($ekseffrente) $html .= '<div class="emlan-ekseffrente">'.$ekseffrente.'</div>';
+		if ($ekseffrente) $html .= '<div class="emlan-ekseffrente">'.esc_html($ekseffrente).'</div>';
 		
 		// les mer
 		$lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
-		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke emlan-lenke-lesmer" href="'.$lesmer.'">Les Mer</a></div>';
+		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les Mer</a></div>';
 		
 		$html .= '</div>';
 
@@ -198,12 +194,34 @@ final class Emlan_Shortcode {
 		return $html;
 	}
 
+	/*
+		shortcode for adding picture of lån
+	*/
 	public function shortcode_bilde($atts, $content = null) {
+		if (! isset($atts['name'])) return;
 
+		$post = get_posts([
+							'name'        => $atts['name'],
+							'post_type'   => 'emlan',
+							'post_status' => 'publish',
+							'numberposts' => 1
+						]);
+
+		if (! isset($post[0])) return;
+
+		$thumbnail = get_the_post_thumbnail_url($post[0], 'full');
+		if ($thumbnail) return '<div class="emlan-bilde"><img class="emlan-bilde-image" src="'.esc_url($thumbnail).'"></div>';
+					
 	}
 
+	/*
+		shortcode for adding button for "Få Tilbud Nå"
+	*/
 	public function shortcode_sok($atts, $content = null) {
+		if (! isset($atts['name'])) return;
 
+		$this->add_css();
+		return '<div class="emlan-fatilbud-container"><a class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($this->get_meta($atts['name'], 'fatilbud')).'">Få Tilbud Nå</a></div>'; 
 	}
 
 	/*
@@ -217,6 +235,9 @@ final class Emlan_Shortcode {
 		}
 	}
 
+	/*
+		adding js to footer which adds css to header
+	*/
 	public function footer() {
 		echo '<script defer>
 				(function() {
@@ -236,16 +257,58 @@ final class Emlan_Shortcode {
 			  </script>';
 	}
 
+	/*
+		theme search hook
+	*/
 	public function emlan_shortcode($post_id) {
 		add_action('wp_footer', array($this, 'footer'));
 
 		$meta = get_post_meta($post_id, 'emlan');
 
+		// echoing one lån
 		if (isset($meta[0])) echo $this->make_lan($meta[0]); 
 	}
 
-	public function add_links($value) {
+	/*
+		hooking into emtheme for adding google fonts
+	*/
+	public function add_google_fonts($value) {
 
 		return $value;
+	}
+
+	/*
+		helper function for getting meta data
+	*/
+	private function get_meta($slug, $meta_name, $ignore_check = null) {
+
+		// getting post
+		$post = get_posts([
+			'name'        => $slug,
+			'post_type'   => 'emlan',
+			'post_status' => 'publish',
+			'numberposts' => 1
+		]);
+
+		// if no post found
+		if (! $post) return false;
+
+		// fix return value
+		$post = $post[0];
+		
+		// if to be ignored
+		if ($ignore_check) {
+			$terms = wp_get_post_terms($post->ID, 'emlantype');
+
+			foreach($terms as $t) 
+				if ($t->slug == $ignore_check) return false;
+		}
+
+		// getting meta
+		$meta = get_post_meta($post->ID, 'emlan');
+		if (! isset($meta[0][$meta_name])) return false;
+
+		// returning meta
+		return $meta[0][$meta_name];
 	}
 }

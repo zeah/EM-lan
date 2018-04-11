@@ -44,9 +44,6 @@ html {
 .emlan-row {
 	display: flex;
 	justify-content: space-between;
-	/*align-content: center;*/
-	/*margin-bottom: 2rem;*/
-	/*padding-bottom: 2rem;*/
 	border-bottom: dashed 1px hsla(0, 0%, 30%, .5);
 }
 .emlan-row:last-child {
@@ -61,23 +58,30 @@ html {
 .emlan-middlerow {
 	padding: 1rem 0;
 	background-color: hsla(0, 0%, 90%, .3);
-	/*justify-content: space-around;*/
-
 }
 .emlan-bottomrow {
 	padding-top: 1rem;
 }
 
 .emlan-row > div {
-	/*border: solid 1px black;*/
 	align-self: center;
 	padding: 0 1rem;
-	/*text-align: center;*/
 }
 
 /* THUMBNAIL */
 .emlan-thumbnail-image {
 	height: 5rem;
+}
+
+/* standalone image (from shortcode [emlan-bilde])*/
+.emlan-bilde {
+	max-width: 20rem;
+	margin: auto;
+	text-align: center;
+}
+
+.emlan-bilde-image {
+	max-width: 20rem;
 }
 
 .emlan-belop:before,
@@ -86,7 +90,6 @@ html {
 .emlan-effrente:before {
 	display: block;
 	font-weight: bold;
-	/*text-align: center;*/
 }
 
 
@@ -143,6 +146,13 @@ html {
 /* FÅ_TILBUD */
 .emlan-fatilbud {
 	width: 20rem;
+}
+
+/* shortcode [emlan-bestill] */
+.emlan-fatilbud-container {
+	width: 20rem;
+	margin: 1rem auto;
+	text-align: center;
 }
 
 /* LES_MER */
