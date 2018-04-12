@@ -59,6 +59,12 @@ html {
 	font-size: 1.4rem;
 	background-color: hsla(0, 0%, 90%, .3);
 }
+
+.emlan-middlerow > div {
+	/*width: 33%;
+	text-align: left;*/
+}
+
 .emlan-bottomrow {
 	padding-top: 1rem;
 }
@@ -70,7 +76,12 @@ html {
 
 /* THUMBNAIL */
 .emlan-thumbnail-image {
-	height: 5rem;
+	/*height: 5rem;*/
+	width: 15rem;
+}
+
+.emlan-thumbnail {
+	/*width: 15rem;*/
 }
 
 /* standalone image (from shortcode [emlan-bilde])*/
