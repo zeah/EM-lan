@@ -18,7 +18,8 @@ html {
 	position: relative;
 	top: 3px;
 	font-size: 1.8rem;
-	color: hsl(120, 20%, 50%);
+	color: hsl(35, 100%, 60%);
+	text-shadow: 0 0 2px #aaa;
 }
 
 
@@ -36,15 +37,11 @@ html {
 	margin-bottom: 3rem;
 }
 
-/*.emlan-container > div > div {
-	border: solid 1px black;
-}*/
-
 /* ROW */
 .emlan-row {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: dashed 1px hsla(0, 0%, 30%, .5);
+	border-bottom: dashed 1px hsla(0, 0%, 30%, .1);
 }
 .emlan-row:last-child {
 	margin-bottom: 0;
@@ -53,10 +50,13 @@ html {
 }
 
 .emlan-toprow {
-	padding-bottom: 1rem;
+	padding-bottom: 2rem;
+	height: 6rem;
 }
 .emlan-middlerow {
-	padding: 1rem 0;
+	justify-content: space-around;
+	line-height: 2.8;
+	font-size: 1.4rem;
 	background-color: hsla(0, 0%, 90%, .3);
 }
 .emlan-bottomrow {
@@ -124,24 +124,24 @@ html {
 }
 
 .emlan-lenke-fatilbud {
+	position: relative;
+	top: 1rem;
 	background-image: linear-gradient(rgb(136, 221, 72) 0%, rgb(95, 177, 57) 100%);
-	text-shadow: 1px 1px 1px hsl(120, 20%, 30%);
+	border: solid 1px #60AE40;
+
+	font-family: Arial, sans-serif;
+	font-size: 2.2rem;
 	font-weight: 700;
-	border: solid 1px rgb(95,177,57);
+
 }
 
-.emlan-lenke-fatilbud:hover {
-	background-image: linear-gradient(rgb(136, 241, 72) 0%, rgb(95, 197, 57) 100%);
-	border: solid 1px rgb(95,197,57);
-	text-shadow: 2px 2px 2px hsl(120, 20%, 30%);
+.emlan-fatilbud:after {
+	display: block;
+	position: relative;
+	top: 2rem;
+	content: 'Annonse lenke';
 }
 
-.emlan-lenke-lesmer {
-	background-image: linear-gradient(hsl(0, 0%, 70%) 10%, hsl(0, 0%, 60%) 90%);
-	padding: 0.3rem 1rem;
-	border-radius: 3px;
-	font-size: 1.6rem;
-}
 
 /* FÅ_TILBUD */
 .emlan-fatilbud {

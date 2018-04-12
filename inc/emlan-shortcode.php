@@ -6,8 +6,8 @@ final class Emlan_Shortcode {
 	/*singleton*/
 	private static $instance = null;
 
-	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css';
-	private $mobile = EMLAN_PLUGIN_URL.'assets/css/emlan-mobile.css';
+	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css?v=1.0.2';
+	private $mobile = EMLAN_PLUGIN_URL.'assets/css/emlan-mobile.css?v=1.0.0';
 	private $added_js = false;
 
 	public static function get_instance() {
@@ -126,6 +126,7 @@ final class Emlan_Shortcode {
 	*/
 	private function make_lan($meta) {
 		global $post;
+		// wp_die(print_r($post, true));
 
 		// $html = print_r($meta, true);
 
@@ -134,9 +135,11 @@ final class Emlan_Shortcode {
 		// first row
 		$html .= '<div class="emlan-row emlan-toprow">';
 
+		$lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
+
 		// thumbnail
 		$thumbnail = get_the_post_thumbnail_url($post, 'full');
-		if ($thumbnail) $html .= '<div class="emlan-thumbnail"><img class="emlan-thumbnail-image" src="'.esc_url($thumbnail).'"></div>';
+		if ($thumbnail) $html .= '<div class="emlan-thumbnail">'.($lesmer ? '<a href="'.esc_url($lesmer).'">' : '').'<img class="emlan-thumbnail-image" src="'.esc_url($thumbnail).'">'.($lesmer ? '</a>' : '').'</div>';
 
 		// lånebeløp
 		$belop = isset($meta['belop']) ? $meta['belop'] : '';
@@ -183,8 +186,9 @@ final class Emlan_Shortcode {
 		if ($ekseffrente) $html .= '<div class="emlan-ekseffrente">'.esc_html($ekseffrente).'</div>';
 		
 		// les mer
-		$lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
-		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les Mer</a></div>';
+		// $lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
+		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer om '.$post->post_title.'</a></div>';
+		// if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les Mer</a></div>';
 		
 		$html .= '</div>';
 
