@@ -137,9 +137,9 @@ html {
 }
 
 .emlan-lenke-lesmer {
-	background-image: linear-gradient(hsl(0, 0%, 70%) 10%, hsl(0, 0%, 60%) 90%);
+	/*background-image: linear-gradient(hsl(0, 0%, 70%) 10%, hsl(0, 0%, 60%) 90%);*/
 	padding: 0.3rem 1rem;
-	font-size: 1.6rem;
+	/*font-size: 1.6rem;*/
 }
 
 .emlan-ekseffrente {
