@@ -67,6 +67,6 @@ final class Emlan_Posttype {
 			),
 		);
 
-		register_post_type('emlan', $args);
+		register_post_type('emcasino', $args);
 	}
 }
