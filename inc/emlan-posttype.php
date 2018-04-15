@@ -16,7 +16,6 @@ final class Emlan_Posttype {
 	}
 
 	private function __construct() {
-
 		Emlan_Taxonomy::get_instance();
 		Emlan_Edit::get_instance();
 
@@ -67,6 +66,6 @@ final class Emlan_Posttype {
 			),
 		);
 
-		register_post_type('emcasino', $args);
+		register_post_type('emlan', $args);
 	}
 }

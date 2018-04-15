@@ -6,7 +6,7 @@ final class Emlan_Shortcode {
 	/*singleton*/
 	private static $instance = null;
 
-	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css?v=1.0.6';
+	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css?v=1.0.7';
 	private $mobile = EMLAN_PLUGIN_URL.'assets/css/emlan-mobile.css?v=1.0.0';
 	private $added_js = false;
 
@@ -187,8 +187,8 @@ final class Emlan_Shortcode {
 		
 		// les mer
 		// $lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
-		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer om '.$post->post_title.'</a></div>';
-		// if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les Mer</a></div>';
+		// if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer om '.$post->post_title.'</a></div>';
+		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer</a></div>';
 		
 		$html .= '</div>';
 

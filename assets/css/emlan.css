@@ -56,7 +56,8 @@ html {
 	height: 6rem;
 }
 .emlan-middlerow {
-	justify-content: space-around;
+	/*justify-content: space-around;*/
+	justify-content: center;
 	line-height: 2.8;
 	font-size: 1.4rem;
 	background-color: hsla(0, 0%, 90%, .3);
@@ -137,7 +138,7 @@ html {
 	display: block;
 	position: relative;
 	top: 2rem;
-	content: 'Annonse lenke';
+	content: 'Annonselenke';
 }
 
 
