@@ -82,33 +82,39 @@ html {
 	text-align: center;
 }
 
+.emlan-belop,
+.emlan-nedbetaling,
+.emlan-alder,
+.emlan-effrente {
+	font-weight: 700;
+}
 
-.emlan-belop:before,
-.emlan-nedbetaling:before,
-.emlan-alder:before,
-.emlan-effrente:before {
+.emlan-belop:after,
+.emlan-nedbetaling:after,
+.emlan-alder:after,
+.emlan-effrente:after {
 	display: block;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 
 /* BELØP */
-.emlan-belop:before {
+.emlan-belop:after {
 	content: 'Lånebeløp';
 }
 
 /* NEDBETALING */
-.emlan-nedbetaling:before {
+.emlan-nedbetaling:after {
 	content: 'Nedbetaling';
 }
 
 /* ALDERGRENSE */
-.emlan-alder:before {
+.emlan-alder:after {
 	content: 'Aldersgrense';
 }
 
 /* EFFEKTIV_RENTE */
-.emlan-effrente:before {
+.emlan-effrente:after {
 	content: 'Effektiv Rente';
 }
 
@@ -149,7 +155,7 @@ html {
 
 /* shortcode [emlan-bestill] */
 .emlan-fatilbud-container {
-	margin: 2rem auto;
+	margin: 1rem auto;
 	text-align: center;
 	padding-bottom: 3rem;
 }
