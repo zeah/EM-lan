@@ -188,7 +188,7 @@ final class Emlan_Shortcode {
 		// les mer
 		// $lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
 		// if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer om '.$post->post_title.'</a></div>';
-		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer</a></div>';
+		if ($lesmer) $html .= '<div class="emlan-lesmer"><a target="_blank" class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer</a></div>';
 		
 		$html .= '</div>';
 
@@ -225,7 +225,7 @@ final class Emlan_Shortcode {
 		if (! isset($atts['name'])) return;
 
 		$this->add_css();
-		return '<div class="emlan-fatilbud-container"><a class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($this->get_meta($atts['name'], 'fatilbud')).'">Få Tilbud Nå</a></div>'; 
+		return '<div class="emlan-fatilbud-container"><a target="_blank" class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($this->get_meta($atts['name'], 'fatilbud')).'">Få Tilbud Nå</a></div>'; 
 	}
 
 	/*
