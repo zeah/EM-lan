@@ -3,7 +3,7 @@
 /**
 	Plugin Name: EM-Lån
 	Description: liste over lån for effektiv markedsforing
-	Version: 0.0.10
+	Version: 0.0.11
 */
 
 require_once 'inc/emlan-shortcode.php';
