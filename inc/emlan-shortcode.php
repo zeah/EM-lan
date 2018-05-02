@@ -159,7 +159,7 @@ final class Emlan_Shortcode {
 		
 		// få tilbud
 		$fatilbud = isset($meta['fatilbud']) ? $meta['fatilbud'] : '';
-		if ($fatilbud) $html .= '<div class="emlan-fatilbud"><a class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($fatilbud).'">Få Tilbud Nå</a></div>';
+		if ($fatilbud) $html .= '<div class="emlan-fatilbud"><a target="_blank" rel="noopener" class="emlan-lenke emlan-lenke-fatilbud" href="'.esc_url($fatilbud).'">Få Tilbud Nå</a></div>';
 		
 		$html .= '</div>';
 
@@ -188,7 +188,7 @@ final class Emlan_Shortcode {
 		// les mer
 		// $lesmer = isset($meta['lesmer']) ? $meta['lesmer'] : '';
 		// if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer om '.$post->post_title.'</a></div>';
-		if ($lesmer) $html .= '<div class="emlan-lesmer"><a target="_blank" rel="noopener" class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer</a></div>';
+		if ($lesmer) $html .= '<div class="emlan-lesmer"><a class="emlan-lenke-lesmer" href="'.esc_url($lesmer).'">Les mer</a></div>';
 		
 		$html .= '</div>';
 
