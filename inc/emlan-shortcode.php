@@ -267,7 +267,11 @@ final class Emlan_Shortcode {
 	public function emlan_shortcode($post_id) {
 		add_action('wp_footer', array($this, 'footer'));
 
+		foreach(wp_get_post_terms($post_id, 'emlantype') as $term)
+			if ($term->slug == 'ignore') return;
+
 		$meta = get_post_meta($post_id, 'emlan');
+
 
 		// echoing one lån
 		if (isset($meta[0])) echo $this->make_lan($meta[0]); 
