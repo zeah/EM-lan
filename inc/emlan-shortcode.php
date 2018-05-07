@@ -6,8 +6,8 @@ final class Emlan_Shortcode {
 	/*singleton*/
 	private static $instance = null;
 
-	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css?v=1.0.7';
-	private $mobile = EMLAN_PLUGIN_URL.'assets/css/emlan-mobile.css?v=1.0.0';
+	private $desktop = EMLAN_PLUGIN_URL.'assets/css/emlan.css?v=1.0.7.1';
+	private $mobile = EMLAN_PLUGIN_URL.'assets/css/emlan-mobile.css?v=1.0.0.1';
 	private $added_js = false;
 
 	public static function get_instance() {
