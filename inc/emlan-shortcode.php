@@ -37,6 +37,7 @@ final class Emlan_Shortcode {
 	*/
 	public function set_search($query) {
         if ($query->is_search) {
+            if ($query->get('post_type') == 'user_request') return;
 	        if (!$query->get('post_type')) $query->set('post_type', array('page', 'post', 'emlan'));
 	        else $query->set('post_type', array_merge(array('emlan'), $query->get('post_type')));
 		}
