@@ -29,6 +29,10 @@ final class Emlan_Shortcode {
 
         add_filter('pre_get_posts', array($this, 'set_search'), 99);
 		add_filter('add_google_fonts', array($this, 'add_google_fonts'), 99);
+
+
+		add_action('emlan_style', array($this, 'add_css'));
+		add_action('emlan_search', array($this, 'emlan_shortcode'));
 	}
 
 
@@ -233,7 +237,7 @@ final class Emlan_Shortcode {
 		helper function for adding css
 		adds javascript to footer that adds css files to header
 	*/
-	private function add_css() {
+	public function add_css() {
 		if (! $this->added_js) {
 			add_action('wp_footer', array($this, 'footer'));
 			$this->add_js = true;
@@ -265,18 +269,19 @@ final class Emlan_Shortcode {
 	/*
 		theme search hook
 	*/
-	public function emlan_shortcode($post_id) {
+	public function emlan_shortcode($post) {
 		add_action('wp_footer', array($this, 'footer'));
 
-		foreach(wp_get_post_terms($post_id, 'emlantype') as $term)
+		foreach(wp_get_post_terms($post->ID, 'emlantype') as $term)
 			if ($term->slug == 'ignore') return;
 
-		$meta = get_post_meta($post_id, 'emlan');
+		$meta = get_post_meta($post->ID, 'emlan');
 
 
 		// echoing one lån
 		if (isset($meta[0])) echo $this->make_lan($meta[0]); 
 	}
+
 
 	/*
 		hooking into emtheme for adding google fonts
