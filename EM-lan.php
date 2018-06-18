@@ -4,6 +4,7 @@
 	Plugin Name: EM-Lån
 	Description: liste over lån for effektiv markedsforing
 	Version: 0.0.12
+	GitHub Plugin URI: zeah/EM-lan
 */
 
 require_once 'inc/emlan-shortcode.php';
